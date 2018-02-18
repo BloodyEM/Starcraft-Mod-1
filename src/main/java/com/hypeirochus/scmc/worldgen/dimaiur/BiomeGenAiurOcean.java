@@ -3,7 +3,6 @@ package com.hypeirochus.scmc.worldgen.dimaiur;
 import java.util.Random;
 
 import com.hypeirochus.scmc.handlers.BiomeHandler;
-import com.hypeirochus.scmc.handlers.BlockHandler;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
