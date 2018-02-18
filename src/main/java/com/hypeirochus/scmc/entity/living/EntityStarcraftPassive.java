@@ -27,7 +27,7 @@ public abstract class EntityStarcraftPassive extends EntityTameable implements I
 	private static final DataParameter<String>	OWNER		= EntityDataManager.createKey(EntityStarcraftPassive.class, DataSerializers.STRING);
 
 	List<EnumTypeAttributes>					types		= new ArrayList<EnumTypeAttributes>(15);
-	List<EnumFactionTypes>						factions	= new ArrayList<EnumFactionTypes>(15);
+	EnumFactionTypes							faction;
 	EnumColors									teamColor;
 	HashMap<EnumTypeAttributes, Double>			bonusDamage	= new HashMap<EnumTypeAttributes, Double>();
 
@@ -38,6 +38,14 @@ public abstract class EntityStarcraftPassive extends EntityTameable implements I
 	@Override
 	public boolean getCanSpawnHere() {
 		return true;
+	}
+
+	public String getOwnerFromFaction(EnumFactionTypes faction) {
+		return faction.toString();
+	}
+
+	public String getFactionAsString() {
+		return this.faction.toString();
 	}
 
 	@Override
@@ -62,12 +70,7 @@ public abstract class EntityStarcraftPassive extends EntityTameable implements I
 	}
 
 	public boolean isFaction(EnumFactionTypes faction) {
-		for (int x = 0; x < factions.size(); x++) {
-			if (this.factions.get(x) == faction) {
-				return true;
-			}
-		}
-		return false;
+		return faction == this.faction;
 	}
 
 	public EnumColors getColor() {
@@ -92,10 +95,17 @@ public abstract class EntityStarcraftPassive extends EntityTameable implements I
 		return this;
 	}
 
-	public EntityStarcraftPassive setFactions(EnumFactionTypes... types) {
-		for (int x = 0; x < types.length; x++) {
-			this.factions.add(x, types[x]);
+	/**
+	 * 
+	 * @param types
+	 *            Sets the mob to be under the given factions.
+	 * @return The mob.
+	 */
+	public EntityStarcraftPassive setFactions(EnumFactionTypes faction) {
+		if (this.getStarcraftOwner().contentEquals("")) {
+			this.setStarcraftOwner(this.getOwnerFromFaction(faction));
 		}
+		this.faction = faction;
 		return this;
 	}
 

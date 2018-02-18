@@ -141,6 +141,10 @@ public abstract class EntityStarcraftMob extends EntityMob implements IEntityTea
 		this.faction = faction;
 		return this;
 	}
+	
+	public EnumFactionTypes getFaction() {
+		return faction;
+	}
 
 	/**
 	 * Stores the NBT for the entity.
@@ -248,21 +252,25 @@ public abstract class EntityStarcraftMob extends EntityMob implements IEntityTea
 			if (entity instanceof EntityStarcraftMob) {
 				if (entity.isCreatureType(EnumCreatureType.MONSTER, false)) {
 					if (!((EntityStarcraftMob) entity).getStarcraftOwner().contentEquals(this.getStarcraftOwner())) {
-						return true;
+						if(!((EntityStarcraftMob) entity).isFaction(this.getFaction())) {
+							return true;
+						}else {
+							return false;
+						}
 					} else {
 						return false;
 					}
 				}
 			} else if (entity instanceof EntityStarcraftPassive) {
 				if (entity.isCreatureType(EnumCreatureType.CREATURE, false)) {
-					if (!((EntityStarcraftPassive) entity).isFaction(faction)) {
-						if (!((EntityStarcraftPassive) entity).getUniqueID().toString().contentEquals(this.getStarcraftOwner()) && !((EntityStarcraftPassive) entity).isType(EnumTypeAttributes.CRITTER)) {
+					if (!((EntityStarcraftPassive) entity).getStarcraftOwner().contentEquals(this.getStarcraftOwner())) {
+						if(!((EntityStarcraftPassive) entity).isFaction(this.getFaction())) {
 							return true;
-						} else {
+						}else {
 							return false;
 						}
-					} else if (!((EntityStarcraftPassive) entity).getStarcraftOwner().contentEquals(this.getStarcraftOwner())) {
-						return true;
+					} else {
+						return false;
 					}
 				}
 			} else if (entity instanceof EntityPlayer) {
