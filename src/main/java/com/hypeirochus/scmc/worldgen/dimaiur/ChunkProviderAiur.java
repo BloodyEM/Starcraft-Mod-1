@@ -5,6 +5,8 @@ import java.util.Random;
 
 import javax.annotation.Nullable;
 
+import com.hypeirochus.scmc.handlers.BiomeHandler;
+
 import net.minecraft.block.BlockFalling;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EnumCreatureType;
@@ -311,7 +313,7 @@ public class ChunkProviderAiur implements IChunkGenerator {
 		net.minecraftforge.event.ForgeEventFactory.onChunkPopulate(true, this, this.world, this.rand, x, z, flag);
 
 		// TODO: Fix the lake spawning for this
-		if (biome != Biomes.DESERT && biome != Biomes.DESERT_HILLS && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0)
+		if (biome != BiomeHandler.biomeAiurProtossCity && this.settings.useWaterLakes && !flag && this.rand.nextInt(this.settings.waterLakeChance) == 0)
 			if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAKE)) {
 				int i1 = this.rand.nextInt(16) + 8;
 				int j1 = this.rand.nextInt(256);
@@ -319,7 +321,7 @@ public class ChunkProviderAiur implements IChunkGenerator {
 				(new WorldGenLakes(Blocks.WATER)).generate(this.world, this.rand, blockpos.add(i1, j1, k1));
 			}
 
-		if (!flag && this.rand.nextInt(this.settings.lavaLakeChance / 10) == 0 && this.settings.useLavaLakes)
+		if (biome != BiomeHandler.biomeAiurProtossCity && this.rand.nextInt(this.settings.lavaLakeChance / 10) == 0 && this.settings.useLavaLakes)
 			if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.LAVA)) {
 				int i2 = this.rand.nextInt(16) + 8;
 				int l2 = this.rand.nextInt(this.rand.nextInt(248) + 8);
@@ -330,7 +332,6 @@ public class ChunkProviderAiur implements IChunkGenerator {
 				}
 			}
 
-		biome.decorate(this.world, this.rand, new BlockPos(i, 0, j));
 		if (net.minecraftforge.event.terraingen.TerrainGen.populate(this, this.world, this.rand, x, z, flag, net.minecraftforge.event.terraingen.PopulateChunkEvent.Populate.EventType.ANIMALS))
 			WorldEntitySpawner.performWorldGenSpawning(this.world, biome, i + 8, j + 8, 16, 16, this.rand);
 		blockpos = blockpos.add(8, 0, 8);

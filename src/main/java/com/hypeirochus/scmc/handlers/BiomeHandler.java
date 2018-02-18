@@ -2,6 +2,7 @@ package com.hypeirochus.scmc.handlers;
 
 import com.hypeirochus.scmc.worldgen.dimaiur.BiomeGenAiurJungle;
 import com.hypeirochus.scmc.worldgen.dimaiur.BiomeGenAiurMountains;
+import com.hypeirochus.scmc.worldgen.dimaiur.BiomeGenAiurOcean;
 import com.hypeirochus.scmc.worldgen.dimaiur.BiomeGenAiurPlains;
 import com.hypeirochus.scmc.worldgen.dimaiur.BiomeGenAiurProtossCity;
 import com.hypeirochus.scmc.worldgen.dimchar.BiomeGenCharAshPlains;
@@ -164,6 +165,13 @@ public class BiomeHandler extends Biome {
 
 		GameRegistry.register(biomeKaldirProtossCity);
 		GameRegistry.register(biomeKaldirZergHive);
+		
+		/** Aiur registration **/
+		GameRegistry.register(biomeAiurOcean);
+		GameRegistry.register(biomeAiurPlains);
+		GameRegistry.register(biomeAiurJungle);
+		GameRegistry.register(biomeAiurMountains);
+		GameRegistry.register(biomeAiurProtossCity);
 
 		GameRegistry.register(biomeSpace);
 	}
@@ -246,7 +254,8 @@ public class BiomeHandler extends Biome {
 		biomeAiurJungle = new BiomeGenAiurJungle((new Biome.BiomeProperties("Aiur Jungle")).setBaseHeight(0.0F).setHeightVariation(0).setTemperature(1.0F).setRainfall(0.5F));
 		biomeAiurPlains = new BiomeGenAiurPlains((new Biome.BiomeProperties("Aiur Plains")).setBaseHeight(0.0F).setHeightVariation(0.025F).setTemperature(0.1F).setRainfall(0.5F));
 		biomeAiurProtossCity = new BiomeGenAiurProtossCity((new Biome.BiomeProperties("Aiur Protoss City")).setBaseHeight(0.0F).setHeightVariation(0).setTemperature(1.0F).setRainfall(0.5F));
-
+		biomeAiurOcean = new BiomeGenAiurOcean((new Biome.BiomeProperties("Aiur Ocean")).setBaseHeight(-0.5F).setHeightVariation(0.35F).setTemperature(0.3F), "aiur_ocean");
+		
 		// add or remove spawn biomes here
 
 		BiomeManager.addSpawnBiome(BiomeHandler.biomeCharAshPlains);
@@ -270,6 +279,7 @@ public class BiomeHandler extends Biome {
 		BiomeManager.removeSpawnBiome(BiomeHandler.biomeShakurasDeepOcean);
 		BiomeManager.removeSpawnBiome(BiomeHandler.biomeCharLavaOcean);
 		BiomeManager.removeSpawnBiome(BiomeHandler.biomeCharLavaDeepOcean);
+		BiomeManager.removeSpawnBiome(BiomeHandler.biomeAiurOcean);
 
 		BiomeManager.removeSpawnBiome(BiomeHandler.biomeCharGlassPlains);
 		BiomeManager.removeSpawnBiome(BiomeHandler.biomeCharScars);
