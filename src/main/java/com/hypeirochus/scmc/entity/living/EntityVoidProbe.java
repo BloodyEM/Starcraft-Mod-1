@@ -34,7 +34,7 @@ public class EntityVoidProbe extends EntityProtossPassive {
 	public EntityVoidProbe(World world) {
 		super(world);
 		setSize(1.0F, 1.5F);
-		this.setColor(EnumColors.LIGHT_BLUE);
+		this.setColor(EnumColors.GREEN);
 		this.setFactions(EnumFactionTypes.DAELAAM);
 		setTypes(EnumTypeAttributes.LIGHT, EnumTypeAttributes.MECHANICAL, EnumTypeAttributes.GROUND);
 		tasks.addTask(0, new EntityAISwimming(this));
